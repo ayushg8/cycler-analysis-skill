@@ -7,3 +7,6 @@ output/
 work/
 engine/config.py
 .DS_Store
+
+# macOS sed temp files
+.!*

@@ -1,5 +1,5 @@
 """
-run_all.py  —  Master runner for the cycling battery analysis project.
+run_all.py  --  Master runner for the cycling battery analysis project.
 
 Workflow
 --------
@@ -55,7 +55,7 @@ def main():
 
     csv_files = list(DATA_DIR.glob("*.csv"))
     if not csv_files:
-        print("ERROR: No CSV files found in data/  — drop your files there first.")
+        print("ERROR: No CSV files found in data/  -- drop your files there first.")
         sys.exit(1)
 
     tests = detect_tests()
@@ -102,9 +102,9 @@ def main():
     section("Done  (" + str(elapsed) + " s)")
     print("\nOutputs:")
     for tid in tests:
-        print("  output/" + tid + "/plots/   — capacity, temperature, V-cap panels")
-        print("  output/" + tid + "/csv/     — cycling_all_DOEs.csv, rpt_all_DOEs.csv")
-    print("  output/plots/          — dQ/dV charge and discharge evolution")
+        print("  output/" + tid + "/plots/   -- capacity, temperature, V-cap panels")
+        print("  output/" + tid + "/csv/     -- cycling_all_DOEs.csv, rpt_all_DOEs.csv")
+    print("  output/plots/          -- dQ/dV charge and discharge evolution")
     print()
 
 

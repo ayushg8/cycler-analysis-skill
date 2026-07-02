@@ -1,4 +1,4 @@
-# run.py  —  Discharge Capacity and Temperature plots + CSV per test
+# run.py  --  Discharge capacity, temperature, and state-of-health plots + CSV per test
 #
 # X-axis: total 1C cycle count (carried across 260526 and 260601 files)
 # CSV columns: 1C Cycle | DOE1 Cap (Ah) | DOE1 Max T (°C) | DOE2 Cap (Ah) | ...
@@ -73,7 +73,7 @@ def load_runs_for_test(test_id):
         try:
             df = load_csv(fpath)
         except Exception as e:
-            print("  WARNING: " + fpath.name + " — " + str(e))
+            print("  WARNING: " + fpath.name + " -- " + str(e))
             continue
 
         if is_formation_file(df):
@@ -229,6 +229,15 @@ def main(test_id=None):
             all_runs, "temperature", "Max Temperature (°C)",
             "Max Temperature vs 1C Cycle  --  " + title_base,
             plot_dir / (tid + "_temperature.png"),
+        )
+        # State of health = discharge capacity normalized to the first cycle (%).
+        for _df in all_runs.values():
+            base = _df["capacity_ah"].iloc[0]
+            _df["soh_pct"] = (_df["capacity_ah"] / base * 100) if base else float("nan")
+        make_plot(
+            all_runs, "soh_pct", "State of Health (%)",
+            "State of Health vs 1C Cycle  --  " + title_base,
+            plot_dir / (tid + "_soh.png"),
         )
         save_csv(all_runs, csv_dir / "cycling_summary.csv")
 
