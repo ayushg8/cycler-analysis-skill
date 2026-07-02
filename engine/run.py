@@ -222,12 +222,12 @@ def main(test_id=None):
 
         make_plot(
             all_runs, "capacity_ah", "Discharge Capacity (Ah)",
-            "Discharge Capacity vs 1C Cycle  —  " + title_base,
+            "Discharge Capacity vs 1C Cycle  --  " + title_base,
             plot_dir / (tid + "_capacity.png"),
         )
         make_plot(
             all_runs, "temperature", "Max Temperature (°C)",
-            "Max Temperature vs 1C Cycle  —  " + title_base,
+            "Max Temperature vs 1C Cycle  --  " + title_base,
             plot_dir / (tid + "_temperature.png"),
         )
         save_csv(all_runs, csv_dir / "cycling_summary.csv")

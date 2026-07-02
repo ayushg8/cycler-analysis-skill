@@ -29,6 +29,15 @@ def run(data_root: Path, out_dir: Path, work_dir: Path) -> dict:
     work_data = work_dir / "data"
     n = _flatten(data_root, work_data)
 
+    if not sorted(work_data.glob("*.csv")):
+        # No cycling files found: report gracefully instead of letting the
+        # engine hard-exit. SKILL.md's "zero files ingested" path relies on this.
+        return {
+            "tests": [], "does": [], "files_ingested": n, "plots": [], "csvs": [],
+            "summary": (f"0 cycling CSVs found under {data_root}. "
+                        f"Check the --data folder or the Drive layout."),
+        }
+
     # Point the engine at the flattened data + chosen output dir
     os.environ["IBC_DATA_DIR"] = str(work_data)
     os.environ["IBC_OUT_DIR"] = str(out_dir)

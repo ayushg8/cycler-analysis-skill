@@ -22,7 +22,7 @@ From the skill folder:
 It flattens the cycling CSVs, auto-discovers the tests/DOEs, generates the config, runs the full analysis, and writes the plots and CSVs to the results folder. Then show Kunal the plots (Read each PNG) and a one-line summary.
 
 ## If the data cannot be found
-If `run_analysis.py` reports zero files ingested, the layout may have shifted. Locate the data before giving up: list the "Cycler data" folder, walk `1Cycler`/`2Cycler` → month → day, and confirm where the plain `Test#_DOE#` files are, then re-run with the corrected `--data`. As a visual last resort, drive the browser to navigate the Drive (the way the drive was mapped during design). The browser is only for finding files; the analysis reads their contents from the synced local folder.
+If `run_analysis.py` reports zero files ingested, the layout may have shifted. Locate the data before giving up: list the "Cycler data" folder, walk `1Cycler`/`2Cycler` → month → day, and confirm where the plain `Test#_DOE#` files are, then re-run with the corrected `--data`. As a visual last resort, drive the browser to open the Drive folder (the way the drive was mapped during design). The browser is only for finding files; the analysis reads their contents from the synced local folder.
 
 ## Steering
 Kunal can narrow or shape the run in plain language: "just Test 4", "group DOE1 to 5 and keep 7 and 8 separate", "focus on capacity fade", "use last week's folder". New tests or DOEs appear automatically, since selection is by the filename pattern, so he never configures anything.
