@@ -7,8 +7,14 @@ description: Use when Kunal wants his weekly IBC cycler analysis. Finds the late
 
 Reproduce Kunal's weekly scripts-and-graphs routine in one invocation, running as him in Claude Code.
 
-## Preflight
-Confirm you can run Python and that the analysis dependencies are installed (`pip install -r requirements.txt` inside the skill folder). The heavy files need real Python, which the terminal provides.
+## First, run the setup check
+Every invocation, start by running `python preflight.py` from the skill folder. If it prints `READY`, go straight to the run. If it prints `SETUP NEEDED`, walk Kunal through only the missing pieces, then re-run `preflight.py` until it says `READY`:
+
+- **`missing_deps`** — run `pip install -r requirements.txt` in the skill folder.
+- **`data_root_unset`** or **`data_root_missing`** — the skill needs the "Cycler data" Shared Drive available as a local folder. If preflight listed candidate folders, confirm the right one with Kunal and set `DATA_ROOT` in `settings.py` to it. If it listed none, ask Kunal to install Google Drive for Desktop (`https://www.google.com/drive/download/`), sign in with his IBC account, and wait for the "Cycler data" drive to finish syncing, then re-run `preflight.py` and it will find the folder.
+- **`no_cycling_files`** — the folder is set but empty, usually because the drive is still syncing or the wrong folder was picked. Ask Kunal to confirm syncing finished, or point `DATA_ROOT` at the right folder.
+
+This only comes up on first use. Once `DATA_ROOT` is set and valid, the check passes silently and the skill runs straight through. The analysis itself needs real Python (pandas, scipy, matplotlib), which the terminal provides.
 
 ## Data source
 Two possibilities. Detect which one you were handed.
